@@ -43,7 +43,7 @@ public class BaseEntity implements Serializable {
 
     @CreatedDate
     @DateTimeFormat(pattern = DateTimeUtils.DATETIME_FORMAT)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimeUtils.DATETIME_FORMAT)
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-ddTHH:mm:ss.SSS")
     @Column(name = Columns.CREATED_AT)
     protected LocalDateTime createdAt; //when was this created?
 
@@ -53,9 +53,14 @@ public class BaseEntity implements Serializable {
 
     @LastModifiedDate
     @DateTimeFormat(pattern = DateTimeUtils.DATETIME_FORMAT)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimeUtils.DATETIME_FORMAT)
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-ddTHH:mm:ss.SSS")
     @Column(name = Columns.LAST_MODIFIED_AT)
     protected LocalDateTime lastModifiedAt; //when was the last time this was modified?
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.id.equals(((BaseEntity)obj).getId());
+    }
 
     @UtilityClass
     static class Columns {
